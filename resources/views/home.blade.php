@@ -5,6 +5,12 @@
 @section('content')
 <div id="page-wrapper">
 
+	@if(session('status'))
+		<div style="margin:16px auto;max-width:980px;background:#e6ffed;border-left:4px solid #2ecc71;padding:12px 16px;border-radius:4px;color:#064e2d;">
+			{{ session('status') }}
+		</div>
+	@endif
+
 	<header id="header" class="alt">
 		<h1><a href="{{ route('home') }}">Napfény Tours</a></h1>
 		<nav>
@@ -28,8 +34,8 @@
 					@endif
 
 					<li><hr></li>
-					<<li>
-                        <form method="POST" action="{{ route('logout') }}">
+					<li>
+						<form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" style="background:none;border:none;padding:0;color:inherit;cursor:pointer;">Kijelentkezés ({{ Auth::user()->name }})</button>
                         </form>
@@ -110,14 +116,14 @@
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}?v={{ file_exists(public_path('images/pic06.jpg')) ? filemtime(public_path('images/pic06.jpg')) : time() }}" alt="Szafari kenyában" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}" alt="Szafari Kenyában" /></a>
 						<h3 class="major">Luxus Szafari</h3>
 						<p>Kenya vadregényes tájain, az "öt nagyvad" nyomában. Szállás prémium sátortáborban a szavannán.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}?v={{ file_exists(public_path('images/pic07.jpg')) ? filemtime(public_path('images/pic07.jpg')) : time() }}" alt="Bora Bora mesés tengerpartja" /></a>
-						<h3 class="major">Bora Bora</h3>
+						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}" alt="Izland sarki fény" /></a>
+						<h3 class="major">Izland és a Tűz</h3>
 						<p>Vulkántúrák és a sarki fény vadászata. Egy expedíció, ahol a természet elemi ereje dominál.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
