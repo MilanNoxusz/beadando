@@ -116,13 +116,13 @@
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}?v={{ file_exists(public_path('images/pic06.jpg')) ? filemtime(public_path('images/pic06.jpg')) : time() }}" alt="Szafari Kenyában" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}" alt="Szafari Kenyában" /></a>
 						<h3 class="major">Luxus Szafari</h3>
 						<p>Kenya vadregényes tájain, az "öt nagyvad" nyomában. Szállás prémium sátortáborban a szavannán.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}?v={{ file_exists(public_path('images/pic07.jpg')) ? filemtime(public_path('images/pic07.jpg')) : time() }}" alt="Izland sarki fény" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}" alt="Izland sarki fény" /></a>
 						<h3 class="major">Izland és a Tűz</h3>
 						<p>Vulkántúrák és a sarki fény vadászata. Egy expedíció, ahol a természet elemi ereje dominál.</p>
 						<a href="#" class="special">Részletek</a>
