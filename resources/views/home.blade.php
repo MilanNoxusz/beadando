@@ -5,6 +5,12 @@
 @section('content')
 <div id="page-wrapper">
 
+	@if(session('status'))
+		<div style="margin:16px auto;max-width:980px;background:#e6ffed;border-left:4px solid #2ecc71;padding:12px 16px;border-radius:4px;color:#064e2d;">
+			{{ session('status') }}
+		</div>
+	@endif
+
 	<header id="header" class="alt">
 		<h1><a href="{{ route('home') }}">Napfény Tours</a></h1>
 		<nav>
@@ -28,8 +34,8 @@
 					@endif
 
 					<li><hr></li>
-					<<li>
-                        <form method="POST" action="{{ route('logout') }}">
+					<li>
+						<form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" style="background:none;border:none;padding:0;color:inherit;cursor:pointer;">Kijelentkezés ({{ Auth::user()->name }})</button>
                         </form>
@@ -61,7 +67,7 @@
 
 		<section id="one" class="wrapper spotlight style1">
 			<div class="inner">
-				<a href="#" class="image"><img src="{{ asset('images/pic01.jpg') }}" alt="Napfényes tengerpart pálmafákkal" /></a>
+				<a href="#" class="image"><img src="{{ asset('images/pic01.jpg') }}?v={{ file_exists(public_path('images/pic01.jpg')) ? filemtime(public_path('images/pic01.jpg')) : time() }}" alt="Napfényes tengerpart pálmafákkal" /></a>
 				<div class="content">
 					<h2 class="major">Több mint nyaralás</h2>
 					<p>Minket Muskó "Nap" Milán és Sári "fény" Bencének hívnak , és 25 éve az a célunk, hogy fényt csempésszünk az életbe. Nálunk nincsenek dobozos termékek. Mi nem turistákat utaztatunk, hanem felfedezőket kísérünk. Legyen szó spirituális elvonulásról vagy adrenalin-túráról, a "Napfény Garancia" végigkíséri útján.</p>
@@ -72,7 +78,7 @@
 
 		<section id="two" class="wrapper alt spotlight style2">
 			<div class="inner">
-				<a href="#" class="image"><img src="{{ asset('images/pic02.jpg') }}" alt="Luxus villa belső tér" /></a>
+				<a href="#" class="image"><img src="{{ asset('images/pic02.jpg') }}?v={{ file_exists(public_path('images/pic02.jpg')) ? filemtime(public_path('images/pic02.jpg')) : time() }}" alt="Luxus villa belső tér" /></a>
 				<div class="content">
 					<h2 class="major">Signature Collection</h2>
 					<p>Azoknak, akik nem ismernek kompromisszumot. Magánrepülős transzferek, villák saját séffel, VIP belépés a világ legzártabb múzeumaiba. A Signature Collection a Napfény Tours legexkluzívabb szolgáltatása, ahol a lehetetlen nem létezik.</p>
@@ -83,7 +89,7 @@
 
 		<section id="three" class="wrapper spotlight style3">
 			<div class="inner">
-				<a href="#" class="image"><img src="{{ asset('images/pic03.jpg') }}" alt="Zöld erdő vagy dzsungel" /></a>
+				<a href="#" class="image"><img src="{{ asset('images/pic03.jpg') }}?v={{ file_exists(public_path('images/pic03.jpg')) ? filemtime(public_path('images/pic03.jpg')) : time() }}" alt="Zöld erdő vagy dzsungel" /></a>
 				<div class="content">
 					<h2 class="major">Felelős Utazás</h2>
 					<p>Hiszünk abban, hogy a világot szebb állapotban kell hagynunk, mint ahogy találtuk. Minden foglalás után fát ültetünk az Amazonas-medencében. Utazzon tiszta lelkiismerettel, és fedezze fel a természetet anélkül, hogy kárt tenne benne.</p>
@@ -98,25 +104,25 @@
 				<p>Válogatás a legnépszerűbb, gondosan összeállított élménycsomagjainkból. Ezek nem csak helyszínek – ezek életérzések.</p>
 				<section class="features">
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic04.jpg') }}" alt="Bali templom" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic04.jpg') }}?v={{ file_exists(public_path('images/pic04.jpg')) ? filemtime(public_path('images/pic04.jpg')) : time() }}" alt="Bali templom" /></a>
 						<h3 class="major">Spirituális Bali</h3>
 						<p>14 napos feltöltődés Ubud dzsungeleiben, privát jógaoktatóval és tisztítókúrával. Találjon vissza önmagához.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic05.jpg') }}" alt="Velencei csatorna" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic05.jpg') }}?v={{ file_exists(public_path('images/pic05.jpg')) ? filemtime(public_path('images/pic05.jpg')) : time() }}" alt="Velencei csatorna" /></a>
 						<h3 class="major">Velence Rejtett Arca</h3>
 						<p>Hosszú hétvége a lagúnák városában, távol a tömegtől. Privát csónaktúra és borkóstoló a tetőteraszokon.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}" alt="Szafari Kenyában" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}?v={{ file_exists(public_path('images/pic06.jpg')) ? filemtime(public_path('images/pic06.jpg')) : time() }}" alt="Szafari Kenyában" /></a>
 						<h3 class="major">Luxus Szafari</h3>
 						<p>Kenya vadregényes tájain, az "öt nagyvad" nyomában. Szállás prémium sátortáborban a szavannán.</p>
 						<a href="#" class="special">Részletek</a>
 					</article>
 					<article>
-						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}" alt="Izland sarki fény" /></a>
+						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}?v={{ file_exists(public_path('images/pic07.jpg')) ? filemtime(public_path('images/pic07.jpg')) : time() }}" alt="Izland sarki fény" /></a>
 						<h3 class="major">Izland és a Tűz</h3>
 						<p>Vulkántúrák és a sarki fény vadászata. Egy expedíció, ahol a természet elemi ereje dominál.</p>
 						<a href="#" class="special">Részletek</a>

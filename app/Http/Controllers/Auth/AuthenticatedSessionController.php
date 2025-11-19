@@ -28,7 +28,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // flash a success message and redirect to home (or intended URL)
+        $request->session()->flash('status', __('Bejelentkezés sikeres.'));
+
+        return redirect()->intended(route('home', absolute: false));
     }
 
     /**
