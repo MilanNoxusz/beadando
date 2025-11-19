@@ -18,6 +18,23 @@
     <script src="{{ asset('assets/js/breakpoints.min.js') }}"></script>
     <script src="{{ asset('assets/js/util.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        // Auto-hide flash/status messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var el = document.getElementById('flash-status');
+                if (el) {
+                    setTimeout(function () {
+                        el.style.transition = 'opacity 0.5s ease';
+                        el.style.opacity = '0';
+                        setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 500);
+                    }, 5000);
+                }
+            } catch (e) {
+                // silent
+            }
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

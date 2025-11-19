@@ -6,7 +6,7 @@
 <div id="page-wrapper">
 
 	@if(session('status'))
-		<div style="margin:16px auto;max-width:980px;background:#e6ffed;border-left:4px solid #2ecc71;padding:12px 16px;border-radius:4px;color:#064e2d;">
+		<div id="flash-status" style="margin:16px auto;max-width:980px;background:#e6ffed;border-left:4px solid #2ecc71;padding:12px 16px;border-radius:4px;color:#064e2d;">
 			{{ session('status') }}
 		</div>
 	@endif
