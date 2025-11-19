@@ -19,9 +19,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/messages', function () {
-    return view('messages');
-})->middleware('auth')->name('messages');
+use App\Http\Controllers\MessageController;
+
+Route::get('/messages', [MessageController::class, 'index'])->middleware('auth')->name('messages');
+Route::post('/messages', [MessageController::class, 'store'])->middleware('auth')->name('messages.store');
 
 Route::get('/admin', function () {
     return view('admin');

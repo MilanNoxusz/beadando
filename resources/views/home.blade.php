@@ -141,7 +141,7 @@
 			<h2 class="major">Lépjen velünk kapcsolatba</h2>
 			@auth
 				<p>Üdvözöljük, {{ Auth::user()->name }}! Kérjen egyedi ajánlatot.</p>
-				<form method="post" action="#">
+				<form method="post" action="{{ route('messages.store') }}">
 					@csrf
 					<div class="fields">
 						<div class="field">
