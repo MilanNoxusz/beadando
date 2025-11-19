@@ -28,12 +28,12 @@
 					@endif
 
 					<li><hr></li>
-					<li>
-						<form method="POST" action="{{ route('logout') }}">
-							@csrf
-							<a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Kijelentkezés ({{ Auth::user()->name }})</a>
-						</form>
-					</li>
+					<<li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" style="background:none;border:none;padding:0;color:inherit;cursor:pointer;">Kijelentkezés ({{ Auth::user()->name }})</button>
+                        </form>
+                    </li>
 
 				@else
 					<li><hr></li>
