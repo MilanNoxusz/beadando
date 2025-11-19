@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Import data from db_files txt files
+        $this->call(\Database\Seeders\DbFilesSeeder::class);
     }
 }
