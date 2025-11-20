@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SzallodaController;
+use App\Http\Controllers\AdminTavaszController;
 use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
@@ -18,14 +19,27 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/admin', function () {
-    return view('admin');
-})->middleware(['auth', function ($request, $next) {
-    if (auth()->id() !== 5) {
-        abort(403, 'Nincs jogosultságod megtekinteni ezt az oldalt.');
+Route::middleware(['auth', function ($request, $next) {
+
+    if (uth::check() && Auth::user()->role !== 'admin') {
+         abort(403, 'Nincs jogosultságod megtekinteni ezt az oldalt.');
     }
     return $next($request);
-}])->name('admin');
+}])->group(function () {
+    
+    Route::get('/admin', [AdminTavaszController::class, 'index'])->name('admin');
+    
+
+    Route::get('/admin/create', [AdminTavaszController::class, 'create'])->name('admin.create');
+    Route::post('/admin', [AdminTavaszController::class, 'store'])->name('admin.store');
+    
+
+    Route::get('/admin/{id}/edit', [AdminTavaszController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin/{id}', [AdminTavaszController::class, 'update'])->name('admin.update');
+    
+
+    Route::delete('/admin/{id}', [AdminTavaszController::class, 'destroy'])->name('admin.destroy');
+});
 
 
 
@@ -33,7 +47,7 @@ require __DIR__.'/auth.php';
 
 use App\Http\Controllers\MessageController;
 
-//
+
 Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 Route::post('/messages', [MessageController::class, 'store'])->middleware('auth')->name('messages.store');
 
@@ -41,9 +55,25 @@ Route::get('/admin', function () {
     return view('admin');
 })->middleware('auth')->name('admin');
 
-// Ajánlatok (szállodák) list and detail
+
 Route::get('/ajanlatok', [SzallodaController::class, 'index'])->name('szallodak.index');
 Route::get('/ajanlatok/{az}', [SzallodaController::class, 'show'])->name('szallodak.show');
 Route::get('/diagram/data', [SzallodaController::class, 'diagramData'])->name('szallodak.diagram.data');
 Route::get('/diagram/tavasz-data', [SzallodaController::class, 'diagramTavaszData'])->name('szallodak.diagram.tavasz');
 Route::get('/diagram', [SzallodaController::class, 'diagramPage'])->name('szallodak.diagram');
+
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    
+    
+    Route::get('/admin', [AdminTavaszController::class, 'index'])->name('admin');
+    
+    
+    Route::get('/admin/create', [AdminTavaszController::class, 'create'])->name('admin.create');
+    Route::post('/admin', [AdminTavaszController::class, 'store'])->name('admin.store');
+    
+    
+    Route::get('/admin/{id}/edit', [AdminTavaszController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin/{id}', [AdminTavaszController::class, 'update'])->name('admin.update');
+    
+    Route::delete('/admin/{id}', [AdminTavaszController::class, 'destroy'])->name('admin.destroy');
+});
