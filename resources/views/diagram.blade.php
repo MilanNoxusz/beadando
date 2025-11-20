@@ -46,7 +46,6 @@
                 });
             }
 
-            // fetch data and render on load (with debug output)
             document.addEventListener('DOMContentLoaded', function () {
                 var debug = document.getElementById('diagram-debug');
                 function dbg(msg){ try{ if(debug) debug.textContent += msg + '\n'; console.log(msg);}catch(e){}
@@ -57,11 +56,12 @@
                 fetch('{{ route('szallodak.diagram.data') }}')
                     .then(function (res) {
                         dbg('HTTP status: ' + res.status + ' ' + res.statusText);
-                        // Ha nem OK, akkor is olvassuk ki a JSON-t, mert abban van a hibaüzenet
+                        
+                        // Ha a válasz nem OK (pl. 500), olvassuk ki a hibaüzenetet a JSON-ből
                         if (!res.ok) {
                             return res.json().then(function(errData) {
-                                // Dobjunk hibát a szerver üzenetével
-                                throw new Error('Szerver hiba: ' + (errData.error  res.statusText));
+                                // Itt volt a hiányzó || jel
+                                throw new Error('Szerver hiba: ' + (errData.error || res.statusText));
                             });
                         }
                         return res.json();
@@ -74,39 +74,15 @@
                             return;
                         }
 
-                        var labels = Object.keys(data  {});
-                        var values = labels.map(function (k) { return data[k]; });
-
-                        renderChart(labels, values);
-                    })
-                    .catch(function (err) {
-                        // Itt most már a szerver pontos hibaüzenete fog megjelenni
-                        dbg('Error fetching or rendering diagram: ' + err.message);
-                        console.error('Diagram adat lekérési hiba', err);
-                    });
-                    .then(function (res) {
-                        dbg('HTTP status: ' + res.status + ' ' + res.statusText);
-                        if (!res.ok) throw new Error('HTTP error ' + res.status);
-                        return res.json();
-                    })
-                    .then(function (data) {
-                        dbg('Received data: ' + JSON.stringify(data));
-
-                        if (typeof Chart === 'undefined') {
-                            dbg('Chart.js is not loaded (Chart is undefined).');
-                            return;
-                        }
-
+                        // Itt is hiányzott a || jel
                         var labels = Object.keys(data || {});
                         var values = labels.map(function (k) { return data[k]; });
 
-                        dbg('Labels: ' + JSON.stringify(labels));
-                        dbg('Values: ' + JSON.stringify(values));
-
                         renderChart(labels, values);
                     })
                     .catch(function (err) {
-                        dbg('Error fetching or rendering diagram: ' + (err && err.message ? err.message : err));
+                        // Itt jelenik meg a tényleges hiba
+                        dbg('Error fetching or rendering diagram: ' + err.message);
                         console.error('Diagram adat lekérési hiba', err);
                     });
             });
