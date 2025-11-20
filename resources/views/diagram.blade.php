@@ -57,6 +57,35 @@
                 fetch('{{ route('szallodak.diagram.data') }}')
                     .then(function (res) {
                         dbg('HTTP status: ' + res.status + ' ' + res.statusText);
+                        // Ha nem OK, akkor is olvassuk ki a JSON-t, mert abban van a hibaüzenet
+                        if (!res.ok) {
+                            return res.json().then(function(errData) {
+                                // Dobjunk hibát a szerver üzenetével
+                                throw new Error('Szerver hiba: ' + (errData.error  res.statusText));
+                            });
+                        }
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        dbg('Received data: ' + JSON.stringify(data));
+
+                        if (typeof Chart === 'undefined') {
+                            dbg('Chart.js is not loaded (Chart is undefined).');
+                            return;
+                        }
+
+                        var labels = Object.keys(data  {});
+                        var values = labels.map(function (k) { return data[k]; });
+
+                        renderChart(labels, values);
+                    })
+                    .catch(function (err) {
+                        // Itt most már a szerver pontos hibaüzenete fog megjelenni
+                        dbg('Error fetching or rendering diagram: ' + err.message);
+                        console.error('Diagram adat lekérési hiba', err);
+                    });
+                    .then(function (res) {
+                        dbg('HTTP status: ' + res.status + ' ' + res.statusText);
                         if (!res.ok) throw new Error('HTTP error ' + res.status);
                         return res.json();
                     })
