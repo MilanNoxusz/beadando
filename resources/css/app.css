@@ -4,42 +4,34 @@
 
 /* Message card styles */
 .messages-list {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 12px;
-}
-.message-card {
-	background: #ffffff;
-	border: 1px solid #ececec;
-	padding: 14px;
-	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-.message-meta {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 8px;
-}
-.meta-left {
 	display:flex;
-	gap:10px;
-	align-items:center;
+	flex-direction:column;
+	gap:12px;
 }
-.avatar {
-	width:40px;
-	height:40px;
-	border-radius:50%;
-	background:#2ecc71;
-	color:white;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	font-weight:700;
-}
+
+.message-row { display:flex; }
+.message-row { display:table-row; }
+.message-row.mine { }
+
+/* Table-based chat look */
+.messages-table-wrap { overflow-x:auto; }
+.messages-table { width:100%; border-collapse:collapse; }
+.messages-table thead th { text-align:left; padding:8px 10px; font-weight:700; border-bottom:1px solid #eee; }
+.messages-table tbody td { padding:12px 10px; vertical-align:top; border-bottom:1px solid #fafafa; }
+.col-time { width:160px; white-space:nowrap; color:#666; font-size:0.9rem; }
+.col-user { width:220px; }
+.col-message { }
+
+.message-bubble { display:inline-block; padding:10px 14px; border-radius:12px; max-width:75%; background:#ffffff; border:1px solid #eee; color:#222; }
+.message-row.mine .message-bubble { background:#e6ffed; border-color:#c9f3d0; }
+.message-row:not(.mine) .message-bubble { background:#ffffff; }
+
+.meta-left { display:flex; gap:10px; align-items:center; }
+.avatar { width:40px; height:40px; border-radius:50%; background:#3490dc; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; }
+.message-row.mine .avatar { background:#2ecc71; }
 .name { font-weight:700; color:#222; }
 .time { font-size:0.85rem; color:#777; }
-.message-body { color:#333; line-height:1.5; white-space:pre-wrap; }
+.message-body { color:#333; line-height:1.5; white-space:pre-wrap; margin:0; }
 .no-messages { color:#666; padding:16px; background:#fbfbfb; border:1px dashed #eee; border-radius:6px; }
 .sort-link { font-size:0.8rem; color:#0077cc; text-decoration:none; }
 .sort-link:hover { text-decoration:underline; }
