@@ -13,7 +13,7 @@ class AdminMiddleware
     {
         // Csak azt engedjük tovább, aki be van lépve ÉS az ID-ja 1
         // (Vagy írd át arra a számra, ami a te felhasználód ID-ja az adatbázisban)
-        if (Auth::check() && Auth::id() === 1) {
+        if (Auth::check() && Auth::role() === 'admin') {
             return $next($request);
         }
 

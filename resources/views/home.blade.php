@@ -29,7 +29,7 @@
 				@if (Auth::check())
 					<li><a href="{{ route('messages') }}">Üzenetek</a></li>
 
-					@if (Auth::user()->role == admin)
+					@if (Auth::user()->role == 'admin')
 						<li><a href="{{ route('admin') }}" style="color: red;">Admin</a></li>
 					@endif
 
