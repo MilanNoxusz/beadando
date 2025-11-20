@@ -24,7 +24,7 @@
 			<ul class="links">
 				<li><a href="{{ route('home') }}">Főoldal</a></li>
 				<li><a href="{{ route('szallodak.index') }}">Ajánlataink</a></li>
-				<li><a href="#">Signature Collection</a></li>
+				<li><a href="{{ route('szallodak.diagram') }}">Diagram</a></li>
 
 				@if (Auth::check())
 					<li><a href="{{ route('messages') }}">Üzenetek</a></li>
@@ -62,6 +62,7 @@
 			<p>Ahol az utazás a lélekhez ér. <br /> Prémium élmények, személyre szabott kalandok.</p>
 		</div>
 	</section>
+
 
 	<section id="wrapper">
 
@@ -189,3 +190,4 @@
 	</section>
 
 </div>
+ 
