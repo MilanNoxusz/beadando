@@ -114,4 +114,34 @@ class SzallodaController extends Controller
             'values' => $values,
         ]);
     }
+
+    public function diagramTavaszData()
+    {
+        try {
+            // Lekérjük a dátumokat és az aznapi átlagárakat
+            $rows = DB::table('tavasz')
+                ->select('indulas', DB::raw('ROUND(AVG(ar)) as atlag_ar'))
+                ->groupBy('indulas')
+                ->orderBy('indulas')
+                ->get();
+
+            // Adatok szétválogatása címkékre és értékekre
+            // PHP 7.2 kompatibilis szintaxis (nem használunk fn => nyíl függvényt)
+            $labels = $rows->map(function($row) {
+                return $row->indulas;
+            })->toArray();
+
+            $values = $rows->map(function($row) {
+                return $row->atlag_ar;
+            })->toArray();
+
+            return response()->json([
+                'labels' => $labels,
+                'values' => $values,
+            ]);
+
+        } catch (\Throwable $e) {
+            return response()->json(['error' => 'Hiba: ' . $e->getMessage()], 500);
+        }
+    }
 }
