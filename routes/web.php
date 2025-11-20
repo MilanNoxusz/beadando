@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SzallodaController;
 
 Route::get('/', function () {
     return view('home');
@@ -27,3 +28,7 @@ Route::post('/messages', [MessageController::class, 'store'])->middleware('auth'
 Route::get('/admin', function () {
     return view('admin');
 })->middleware('auth')->name('admin');
+
+// Ajánlatok (szállodák) list and detail
+Route::get('/ajanlatok', [SzallodaController::class, 'index'])->name('szallodak.index');
+Route::get('/ajanlatok/{az}', [SzallodaController::class, 'show'])->name('szallodak.show');

@@ -22,8 +22,8 @@
 		<div class="inner">
 			<h2>Menü</h2>
 			<ul class="links">
-				<li><a href="{{ route('home') }}">Kezdőlap</a></li>
-				<li><a href="#">Ajánlataink</a></li>
+				<li><a href="{{ route('home') }}">Főoldal</a></li>
+				<li><a href="{{ route('szallodak.index') }}">Ajánlataink</a></li>
 				<li><a href="#">Signature Collection</a></li>
 
 				@if (Auth::check())
