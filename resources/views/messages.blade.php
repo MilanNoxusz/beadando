@@ -13,9 +13,21 @@
                     <table style="width:100%;border-collapse:collapse">
                         <thead>
                             <tr style="text-align:left;border-bottom:1px solid #ddd;">
-                                <th style="padding:8px">Felhasználó</th>
-                                <th style="padding:8px">Mikor</th>
-                                <th style="padding:8px">Üzenet</th>
+                                <th style="padding:8px">
+                                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'user', 'dir' => ($sort === 'user' && $dir === 'asc') ? 'desc' : 'asc']) }}">Felhasználó
+                                        @if(isset($sort) && $sort === 'user') {!! $dir === 'asc' ? '&uarr;' : '&darr;' !!} @endif
+                                    </a>
+                                </th>
+                                <th style="padding:8px">
+                                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'dir' => ($sort === 'created_at' && $dir === 'asc') ? 'desc' : 'asc']) }}">Mikor
+                                        @if(isset($sort) && $sort === 'created_at') {!! $dir === 'asc' ? '&uarr;' : '&darr;' !!} @endif
+                                    </a>
+                                </th>
+                                <th style="padding:8px">
+                                    <a href="{{ request()->fullUrlWithQuery(['sort' => 'body', 'dir' => ($sort === 'body' && $dir === 'asc') ? 'desc' : 'asc']) }}">Üzenet
+                                        @if(isset($sort) && $sort === 'body') {!! $dir === 'asc' ? '&uarr;' : '&darr;' !!} @endif
+                                    </a>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

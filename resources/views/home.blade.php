@@ -153,8 +153,8 @@
 							<input type="email" name="email" id="email" value="{{ Auth::user()->email }}" readonly />
 						</div>
 						<div class="field">
-							<label for="message">Üzenet / Álom úti cél</label>
-							<textarea name="message" id="message" rows="4"></textarea>
+							<label for="body">Üzenet / Álom úti cél</label>
+							<textarea name="body" id="body" rows="4" required></textarea>
 						</div>
 					</div>
 					<ul class="actions">
