@@ -32,3 +32,5 @@ Route::get('/admin', function () {
 // Ajánlatok (szállodák) list and detail
 Route::get('/ajanlatok', [SzallodaController::class, 'index'])->name('szallodak.index');
 Route::get('/ajanlatok/{az}', [SzallodaController::class, 'show'])->name('szallodak.show');
+Route::get('/diagram/data', [SzallodaController::class, 'diagramData'])->name('szallodak.diagram.data');
+Route::get('/diagram', [SzallodaController::class, 'diagramPage'])->name('szallodak.diagram');
