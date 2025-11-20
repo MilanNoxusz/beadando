@@ -141,30 +141,50 @@
 		<div class="inner">
 			<h2 class="major">Lépjen velünk kapcsolatba</h2>
 			@auth
-				<p>Üdvözöljük, {{ Auth::user()->name }}! Kérjen egyedi ajánlatot.</p>
-				<form method="post" action="{{ route('messages.store') }}">
-					@csrf
-					<div class="fields">
-						<div class="field">
-							<label for="name">Név</label>
-							<input type="text" name="name" id="name" value="{{ Auth::user()->name }}" readonly />
-						</div>
-						<div class="field">
-							<label for="email">Email cím</label>
-							<input type="email" name="email" id="email" value="{{ Auth::user()->email }}" readonly />
-						</div>
-						<div class="field">
-							<label for="body">Üzenet / Álom úti cél</label>
-							<textarea name="body" id="body" rows="4" required></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" value="Üzenet küldése" /></li>
-					</ul>
-				</form>
-			@else
-				<p>Kérjük, <a href="{{ route('login') }}">jelentkezzen be</a> az üzenetküldéshez!</p>
+			<p>Üdvözöljük, {{ Auth::user()->name }}! Kérjen egyedi ajánlatot.</p>
+			<section id="contact" class="wrapper style1">
+			    <div class="inner">
+			        <h2 class="major">Üzenet küldése</h2>
+
+			        @if (session('status'))
+			            <div class="flash-success">{{ session('status') }}</div>
+			        @endif
+
+			        @if ($errors->any())
+			            <div class="flash-errors">
+			                <ul>
+			                    @foreach ($errors->all() as $error)
+			                        <li>{{ $error }}</li>
+			                    @endforeach
+			                </ul>
+			            </div>
+			        @endif
+
+			        <div class="contact-card">
+			            <form method="POST" action="{{ route('messages.store') }}">
+			                @csrf
+		
+			                <div class="contact-fields">
+			                    <label for="body">Üzenet szövege</label>
+			                    <textarea name="body" id="body" rows="5" placeholder="Ide írd az üzenetet..." required></textarea>
+			                </div>
+
+			                <div class="form-actions">
+			                    <button type="submit" class="btn-primary">Küldés</button>
+			                    <button type="reset" class="btn-muted">Mégse</button>
+			                </div>
+			            </form>
+			        </div>
+		
+			    </div>
+			</section>
 			@endauth
+
+			@guest
+				<div class="inner">
+					<p>Üzenetküldéshez kérlek <a href="{{ route('login') }}">jelentkezz be</a>.</p>
+				</div>
+			@endguest
 			<ul class="contact"></ul>
 		</div>
 	</section>

@@ -22,6 +22,7 @@ require __DIR__.'/auth.php';
 
 use App\Http\Controllers\MessageController;
 
+
 Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 Route::post('/messages', [MessageController::class, 'store'])->middleware('auth')->name('messages.store');
 
