@@ -24,35 +24,33 @@ class SzallodaController extends Controller
     /**
      * Return JSON data for a diagram (counts grouped by besorolas).
      */
-    public function diagramData()
-    {
-        try {
-            $data = Szalloda::select('besorolas')
-                ->get()
-                ->groupBy(function ($item) {
-                    return $item->besorolas ?? 'Nincs besorolás';
-                })
-                ->map(function ($group) {
-                    return $group->count();
-                })
-                ->toArray();
+    // Fájl: app/Http/Controllers/SzallodaController.php
 
-            return response()->json($data);
-        } catch (\Exception $e) {
-            Log::error('diagramData error: ' . $e->getMessage());
-            // Fallback sample data so the frontend can render a chart while DB is fixed
-            $fallback = [
-                'Nincs besorolás' => 2,
-                '1 csillag' => 1,
-                '3 csillag' => 4,
-                '4 csillag' => 6,
-                '5 csillag' => 3,
-            ];
+public function diagramData()
+{
+    try {
+        $data = Szalloda::select('besorolas')
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->besorolas ?? 'Nincs besorolás';
+            })
+            ->map(function ($group) {
+                return $group->count();
+            })
+            ->toArray();
 
-            return response()->json($fallback);
-        }
+        return response()->json($data);
+        
+    } catch (\Throwable $e) { 
+        // FIGYELEM: Ideiglenes hibakeresés!
+        // Logolás helyett JSON-ben adjuk vissza a hibát, hogy lássuk a böngészőben.
+        return response()->json([
+            'error' => 'Szerver hiba történt: ' . $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine()
+        ], 500);
     }
-
+}
     /**
      * Show the diagram page (Blade view) which will render Chart.js.
      */
