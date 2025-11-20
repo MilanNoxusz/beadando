@@ -16,19 +16,43 @@
                 </div>
             @endif
 
-            <div style="margin-bottom: 20px;">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <a href="{{ route('admin.create') }}" class="button primary small">Új út hozzáadása</a>
+                
+                
+                <a href="{{ route('home') }}" class="button small">Vissza a főoldalra</a>
             </div>
 
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Szálloda</th>
-                            <th>Indulás</th>
-                            <th>Időtartam (nap)</th>
-                            <th>Ár (Ft)</th>
+                            
+                            @php
+                                
+                                function sortLink($col, $title, $currentSortBy, $currentSortDir) {
+                                    
+                                    $direction = ($currentSortBy == $col && $currentSortDir == 'asc') ? 'desc' : 'asc';
+                                    
+                                    // Nyíl megjelenítése
+                                    $arrow = '';
+                                    if ($currentSortBy == $col) {
+                                        $arrow = $currentSortDir == 'asc' ? ' ▲' : ' ▼';
+                                    }
+                                    
+                                    
+                                    $url = route('admin', ['sort_by' => $col, 'sort_dir' => $direction]);
+                                    
+                                    return '<a href="' . $url . '" style="text-decoration: none; color: inherit; cursor: pointer;">' . $title . $arrow . '</a>';
+                                }
+                            @endphp
+
+                            <th>{!! sortLink('id', 'ID', $sortBy, $sortDir) !!}</th>
+                            <th>{!! sortLink('szalloda_nev', 'Szálloda', $sortBy, $sortDir) !!}</th>
+                            <th>{!! sortLink('indulas', 'Indulás', $sortBy, $sortDir) !!}</th>
+                            <th>{!! sortLink('idotartam', 'Időtartam (nap)', $sortBy, $sortDir) !!}</th>
+                            <th>{!! sortLink('ar', 'Ár (Ft)', $sortBy, $sortDir) !!}</th>
                             <th>Műveletek</th>
                         </tr>
                     </thead>
