@@ -1,4 +1,4 @@
-extends('layouts.html5up')
+@extends('layouts.html5up')
 
 @section('title', 'Statisztikák')
 

@@ -17,6 +17,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware(['auth', function ($request, $next) {
+    if (auth()->id() !== 5) {
+        abort(403, 'Nincs jogosultságod megtekinteni ezt az oldalt.');
+    }
+    return $next($request);
+}])->name('admin');
 
 require __DIR__.'/auth.php';
 

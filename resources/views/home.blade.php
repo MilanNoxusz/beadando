@@ -29,8 +29,8 @@
 				@if (Auth::check())
 					<li><a href="{{ route('messages') }}">Üzenetek</a></li>
 
-					@if (Auth::user()->role == 1)
-						<li><a href="{{ route('admin') }}" style="color: red;">ADMINisztráció</a></li>
+					@if (Auth::user()->role == admin)
+						<li><a href="{{ route('admin') }}" style="color: red;">Admin</a></li>
 					@endif
 
 					<li><hr></li>
@@ -72,7 +72,7 @@
 				<div class="content">
 					<h2 class="major">Több mint nyaralás</h2>
 					<p>Minket Muskó "Nap" Milán és Sári "fény" Bencének hívnak , és 25 éve az a célunk, hogy fényt csempésszünk az életbe. Nálunk nincsenek dobozos termékek. Mi nem turistákat utaztatunk, hanem felfedezőket kísérünk. Legyen szó spirituális elvonulásról vagy adrenalin-túráról, a "Napfény Garancia" végigkíséri útján.</p>
-					<a href="#" class="special">Ismerje meg filozófiánkat</a>
+					
 				</div>
 			</div>
 		</section>
@@ -83,7 +83,7 @@
 				<div class="content">
 					<h2 class="major">Signature Collection</h2>
 					<p>Azoknak, akik nem ismernek kompromisszumot. Magánrepülős transzferek, villák saját séffel, VIP belépés a világ legzártabb múzeumaiba. A Signature Collection a Napfény Tours legexkluzívabb szolgáltatása, ahol a lehetetlen nem létezik.</p>
-					<a href="#" class="special">Luxus utak megtekintése</a>
+					
 				</div>
 			</div>
 		</section>
@@ -94,7 +94,7 @@
 				<div class="content">
 					<h2 class="major">Felelős Utazás</h2>
 					<p>Hiszünk abban, hogy a világot szebb állapotban kell hagynunk, mint ahogy találtuk. Minden foglalás után fát ültetünk az Amazonas-medencében. Utazzon tiszta lelkiismerettel, és fedezze fel a természetet anélkül, hogy kárt tenne benne.</p>
-					<a href="#" class="special">Fenntarthatósági programunk</a>
+					
 				</div>
 			</div>
 		</section>
@@ -108,29 +108,28 @@
 						<a href="#" class="image"><img src="{{ asset('images/pic04.jpg') }}?v={{ file_exists(public_path('images/pic04.jpg')) ? filemtime(public_path('images/pic04.jpg')) : time() }}" alt="Bali templom" /></a>
 						<h3 class="major">Spirituális Bali</h3>
 						<p>14 napos feltöltődés Ubud dzsungeleiben, privát jógaoktatóval és tisztítókúrával. Találjon vissza önmagához.</p>
-						<a href="#" class="special">Részletek</a>
+						
 					</article>
 					<article>
 						<a href="#" class="image"><img src="{{ asset('images/pic05.jpg') }}?v={{ file_exists(public_path('images/pic05.jpg')) ? filemtime(public_path('images/pic05.jpg')) : time() }}" alt="Velencei csatorna" /></a>
 						<h3 class="major">Velence Rejtett Arca</h3>
 						<p>Hosszú hétvége a lagúnák városában, távol a tömegtől. Privát csónaktúra és borkóstoló a tetőteraszokon.</p>
-						<a href="#" class="special">Részletek</a>
+						
 					</article>
 					<article>
 						<a href="#" class="image"><img src="{{ asset('images/pic06.jpg') }}" alt="Szafari Kenyában" /></a>
 						<h3 class="major">Luxus Szafari</h3>
 						<p>Kenya vadregényes tájain, az "öt nagyvad" nyomában. Szállás prémium sátortáborban a szavannán.</p>
-						<a href="#" class="special">Részletek</a>
+						
 					</article>
 					<article>
 						<a href="#" class="image"><img src="{{ asset('images/pic07.jpg') }}" alt="Izland sarki fény" /></a>
 						<h3 class="major">Izland és a Tűz</h3>
 						<p>Vulkántúrák és a sarki fény vadászata. Egy expedíció, ahol a természet elemi ereje dominál.</p>
-						<a href="#" class="special">Részletek</a>
+						
 					</article>
 				</section>
-				<ul class="actions">
-					<li><a href="#" class="button">Összes ajánlat böngészése</a></li>
+				
 				</ul>
 			</div>
 		</section>
