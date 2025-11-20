@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SzallodaController;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('home');
@@ -18,11 +19,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
 require __DIR__.'/auth.php';
 
 use App\Http\Controllers\MessageController;
 
-
+//
 Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 Route::post('/messages', [MessageController::class, 'store'])->middleware('auth')->name('messages.store');
 
